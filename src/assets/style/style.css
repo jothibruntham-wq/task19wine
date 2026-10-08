@@ -1,0 +1,573 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================================
+   FULL DESKTOP STAGE
+========================================= */
+
+.wine-page {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #111;
+}
+
+/* =========================================
+   MAIN FRAME
+========================================= */
+
+.wine-frame {
+  position: relative;
+
+  width: min(100vw, 1440px);
+  height: min(100vh, 850px);
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  background: #bca9ff;
+}
+
+/* =========================================
+   ANIMATED BACKGROUND
+========================================= */
+
+.background-layer {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -3;
+
+  transform-origin: center;
+
+  pointer-events: none;
+}
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.top-bar {
+  position: absolute;
+
+  top: 26px;
+  left: 42px;
+  right: 42px;
+
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  pointer-events: none;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 900;
+
+  letter-spacing: -1px;
+
+  color: #fff;
+}
+
+.logo span {
+  display: inline-block;
+
+  font-size: 13px;
+
+  margin-left: 2px;
+}
+
+.slide-counter {
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =========================================
+   SWIPER
+========================================= */
+
+.wine-swiper {
+  position: absolute !important;
+
+  width: 505px !important;
+  height: 439px !important;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  overflow: visible !important;
+}
+
+.wine-swiper .swiper-wrapper {
+  align-items: center;
+}
+
+.wine-swiper .swiper-slide {
+  width: 505px !important;
+  height: 439px !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+
+  overflow: visible;
+}
+
+/* =========================================
+   SLIDE
+========================================= */
+
+.wine-slide {
+  position: relative;
+
+  width: 505px;
+  height: 439px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: visible;
+}
+
+/* =========================================
+   BIG TYPOGRAPHY
+========================================= */
+
+.wine-title {
+  position: absolute;
+
+  z-index: 2;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  margin: 0;
+
+  width: max-content;
+
+  color: #fff;
+
+  font-size: clamp(64px, 8vw, 112px);
+
+  font-weight: 900;
+
+  letter-spacing: -7px;
+
+  line-height: 0.85;
+
+  white-space: nowrap;
+
+  pointer-events: none;
+
+  text-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.02);
+}
+
+/* =========================================
+   BOTTLE
+========================================= */
+
+.bottle-container {
+  position: absolute;
+
+  z-index: 10;
+
+  left: 50%;
+  top: 50%;
+
+  width: 190px;
+  height: 390px;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.wine-bottle {
+  width: auto;
+  height: 360px;
+
+  max-width: 180px;
+
+  object-fit: contain;
+
+  display: block;
+
+  user-select: none;
+
+  filter:
+    drop-shadow(0 22px 15px rgba(0, 0, 0, 0.22));
+}
+
+/* =========================================
+   SUBTITLE
+========================================= */
+
+.wine-subtitle {
+  position: absolute;
+
+  z-index: 15;
+
+  left: 50%;
+  bottom: 39px;
+
+  transform: translateX(-50%);
+
+  width: max-content;
+
+  color: rgba(255, 255, 255, 0.95);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+/* =========================================
+   FRUITS / DECORATIONS
+========================================= */
+
+.fruit {
+  position: absolute;
+
+  z-index: 8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 54px;
+  height: 54px;
+
+  border-radius: 50%;
+
+  font-size: 30px;
+
+  user-select: none;
+
+  pointer-events: none;
+
+  filter:
+    drop-shadow(0 12px 10px rgba(0, 0, 0, 0.12));
+}
+
+.fruit-left {
+  left: 25px;
+  top: 110px;
+
+  animation: floatLeft 3s ease-in-out infinite;
+}
+
+.fruit-right {
+  right: 25px;
+  top: 125px;
+
+  animation: floatRight 3.4s ease-in-out infinite;
+}
+
+.fruit-small-left {
+  left: 75px;
+  bottom: 95px;
+
+  width: 25px;
+  height: 25px;
+
+  font-size: 15px;
+
+  opacity: 0.55;
+
+  animation: floatSmall 2.7s ease-in-out infinite;
+}
+
+.fruit-small-right {
+  right: 75px;
+  bottom: 80px;
+
+  width: 25px;
+  height: 25px;
+
+  font-size: 15px;
+
+  opacity: 0.55;
+
+  animation: floatSmall 3.2s ease-in-out infinite reverse;
+}
+
+@keyframes floatLeft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-8deg);
+  }
+
+  50% {
+    transform: translate3d(-7px, -12px, 0) rotate(8deg);
+  }
+}
+
+@keyframes floatRight {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(8deg);
+  }
+
+  50% {
+    transform: translate3d(7px, -15px, 0) rotate(-8deg);
+  }
+}
+
+@keyframes floatSmall {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+/* =========================================
+   BOTTOM LINE
+========================================= */
+
+.bottom-line {
+  position: absolute;
+
+  z-index: 20;
+
+  left: 50%;
+  bottom: 21px;
+
+  width: 52px;
+  height: 3px;
+
+  transform: translateX(-50%);
+
+  border-radius: 20px;
+
+  background: #fff;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.bottom-controls {
+  position: absolute;
+
+  z-index: 40;
+
+  left: 42px;
+  right: 42px;
+  bottom: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-button {
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: #fff;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.nav-button:hover {
+  transform: scale(1.08);
+
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.progress-container {
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 8px;
+}
+
+.progress-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.4);
+
+  cursor: pointer;
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.progress-dot.active {
+  width: 25px;
+
+  border-radius: 10px;
+
+  background: #fff;
+}
+
+/* =========================================
+   DESKTOP
+========================================= */
+
+@media (min-width: 1100px) {
+  .wine-swiper,
+  .wine-swiper .swiper-slide,
+  .wine-slide {
+    width: 505px !important;
+  }
+
+  .wine-swiper,
+  .wine-swiper .swiper-slide,
+  .wine-slide {
+    height: 439px !important;
+  }
+
+  .wine-bottle {
+    height: 365px;
+  }
+}
+
+/* =========================================
+   LAPTOP
+========================================= */
+
+@media (max-width: 900px) {
+  .wine-swiper,
+  .wine-swiper .swiper-slide,
+  .wine-slide {
+    width: min(505px, 90vw) !important;
+  }
+
+  .wine-swiper,
+  .wine-swiper .swiper-slide,
+  .wine-slide {
+    height: 430px !important;
+  }
+
+  .wine-title {
+    font-size: 78px;
+  }
+
+  .wine-bottle {
+    height: 330px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .wine-frame {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .top-bar {
+    left: 20px;
+    right: 20px;
+    top: 20px;
+  }
+
+  .wine-swiper,
+  .wine-swiper .swiper-slide,
+  .wine-slide {
+    width: 100vw !important;
+    height: 430px !important;
+  }
+
+  .wine-title {
+    font-size: 58px;
+
+    letter-spacing: -4px;
+  }
+
+  .wine-bottle {
+    height: 315px;
+  }
+
+  .fruit-left {
+    left: 12px;
+  }
+
+  .fruit-right {
+    right: 12px;
+  }
+
+  .bottom-controls {
+    left: 20px;
+    right: 20px;
+  }
+}
