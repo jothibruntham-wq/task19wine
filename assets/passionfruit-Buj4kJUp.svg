@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Rind Gradients -->
+    <radialGradient id="pfRind" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#80336b"/>
+      <stop offset="55%" stop-color="#4d1541"/>
+      <stop offset="85%" stop-color="#310d29"/>
+      <stop offset="100%" stop-color="#1e0519"/>
+    </radialGradient>
+    <radialGradient id="pfPith" cx="42%" cy="40%" r="58%">
+      <stop offset="80%" stop-color="#fdfbf7"/>
+      <stop offset="94%" stop-color="#f5e6cc"/>
+      <stop offset="100%" stop-color="#cf9e7e"/>
+    </radialGradient>
+    <radialGradient id="pfPulp" cx="48%" cy="48%" r="52%">
+      <stop offset="0%" stop-color="#ffd54f"/>
+      <stop offset="35%" stop-color="#ffb300"/>
+      <stop offset="70%" stop-color="#ff8f00"/>
+      <stop offset="100%" stop-color="#e65100"/>
+    </radialGradient>
+    <!-- Seed gradient -->
+    <radialGradient id="pfSeed" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#4a3b32"/>
+      <stop offset="40%" stop-color="#24140e"/>
+      <stop offset="100%" stop-color="#0a0503"/>
+    </radialGradient>
+    <!-- Jelly halo gradient -->
+    <radialGradient id="pfJelly" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ffe082" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#ffb300" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ff6f00" stop-opacity="0.4"/>
+    </radialGradient>
+    <!-- Leaf gradient -->
+    <linearGradient id="pfLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#81c784"/>
+      <stop offset="60%" stop-color="#388e3c"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </linearGradient>
+    <!-- Filter for drop shadow / 3D depth -->
+    <filter id="pfShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="8" stdDeviation="6" flood-color="#160212" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#pfShadow)">
+    <!-- Leaf Behind -->
+    <path d="M145,45 C175,25 185,50 178,75 C172,96 150,92 140,82 C135,77 132,60 145,45 Z" fill="url(#pfLeaf)"/>
+    <path d="M146,55 Q160,65 174,72" stroke="#a5d6a7" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Stem -->
+    <path d="M138,72 C132,65 125,60 118,62 C112,64 114,72 120,74 Z" fill="#2e7d32"/>
+
+    <!-- Outer Rind / Shell -->
+    <ellipse cx="100" cy="104" rx="82" ry="78" fill="url(#pfRind)"/>
+
+    <!-- Outer Rim Highlight -->
+    <path d="M38,72 C55,42 95,30 135,42 C115,34 70,36 45,60 Z" fill="#b05295" opacity="0.6"/>
+
+    <!-- Inner Cream Pith -->
+    <ellipse cx="100" cy="104" rx="72" ry="68" fill="url(#pfPith)"/>
+
+    <!-- Cavity Pulp Basin -->
+    <ellipse cx="100" cy="105" rx="64" ry="60" fill="url(#pfPulp)"/>
+
+    <!-- Pulp Texture Swirls -->
+    <path d="M60,105 Q80,85 110,95 Q140,105 150,120 Q120,145 85,135 Z" fill="#ffa000" opacity="0.45"/>
+    <path d="M75,80 Q105,70 135,85 Q115,115 80,100 Z" fill="#ffd54f" opacity="0.35"/>
+
+    <!-- Pulp Sacs & Seeds (Natural Organised Clusters) -->
+    <!-- Seed 1 -->
+    <g transform="translate(68, 72) rotate(25)">
+      <ellipse cx="0" cy="0" rx="14" ry="9" fill="url(#pfJelly)"/>
+      <ellipse cx="0" cy="0" rx="9" ry="5.5" fill="url(#pfSeed)"/>
+      <circle cx="-3" cy="-2" r="1.8" fill="#ffffff" opacity="0.8"/>
+    </g>
+
+    <!-- Seed 2 -->
+    <g transform="translate(102, 65) rotate(-10)">
+      <ellipse cx="0" cy="0" rx="15" ry="10" fill="url(#pfJelly)"/>
+      <ellipse cx="0" cy="0" rx="10" ry="6" fill="url(#pfSeed)"/>
+      <circle cx="-3" cy="-2" r="2" fill="#ffffff" opacity="0.8"/>
+    </g>
+
+    <!-- Seed 3 -->
+    <g transform="translate(132, 78) rotate(-35)">
+      <ellipse cx="0" cy="0" rx="14" ry="9" fill="url(#pfJelly)"/>
+      <ellipse cx="0" cy="0" rx="9.5" ry="5.5" fill="url(#pfSeed)"/>
+      <circle cx="-3" cy="-2" r="1.8" fill="#ffffff" opacity="0.8"/>
+    </g>
+
+    <!-- Seed 4 -->
+    <g transform="translate(62, 102) rotate(70)">
+      <ellipse cx="0" cy="0" rx="15" ry="10" fill="url(#pfJelly)"/>
+      <ellipse cx="0" cy="0" rx="10" ry="6" fill="url(#pfSeed)"/>
+      <circle cx="-2.5" cy="-2.5" r="1.8" fill="#ffffff" opacity="0.85"/>
+    </g>
+
+    <!-- Seed 5 (Center) -->
+    <g transform="translate(95, 96) rotate(15)">
+      <ellipse cx="0" cy="0" rx="16" ry="11" fill="url(#pfJelly)"/>
+      <ellipse cx="0" cy="0" rx="11" ry="6.5" fill="url(#pfSeed)"/>
+      <circle cx="-3" cy="-2.5" r="2" fill="#ffffff" opacity="0.9"/>
+    </g>
+
+    <!-- Seed 6 -->
+    <g transform="translate(128, 104) rotate(-65)">
+      <ellipse cx="0" cy="0" rx="15" ry="10" fill="url(#pfJelly)"/>
+      <ellipse cx="0" cy="0" rx="10" ry="6" fill="url(#pfSeed)"/>
+      <circle cx="-3" cy="-2" r="1.8" fill="#ffffff" opacity="0.8"/>
+    </g>
+
+    <!-- Seed 7 -->
+    <g transform="translate(75, 132) rotate(45)">
+      <ellipse cx="0" cy="0" rx="14" ry="9" fill="url(#pfJelly)"/>
+      <ellipse cx="0" cy="0" rx="9" ry="5.5" fill="url(#pfSeed)"/>
+      <circle cx="-2.5" cy="-2" r="1.8" fill="#ffffff" opacity="0.8"/>
+    </g>
+
+    <!-- Seed 8 -->
+    <g transform="translate(108, 128) rotate(-15)">
+      <ellipse cx="0" cy="0" rx="15" ry="10" fill="url(#pfJelly)"/>
+      <ellipse cx="0" cy="0" rx="10" ry="6" fill="url(#pfSeed)"/>
+      <circle cx="-3" cy="-2.5" r="2" fill="#ffffff" opacity="0.85"/>
+    </g>
+
+    <!-- Seed 9 -->
+    <g transform="translate(135, 130) rotate(-40)">
+      <ellipse cx="0" cy="0" rx="13" ry="8.5" fill="url(#pfJelly)"/>
+      <ellipse cx="0" cy="0" rx="8.5" ry="5" fill="url(#pfSeed)"/>
+      <circle cx="-2.5" cy="-2" r="1.6" fill="#ffffff" opacity="0.75"/>
+    </g>
+
+    <!-- Seed 10 -->
+    <g transform="translate(94, 146) rotate(5)">
+      <ellipse cx="0" cy="0" rx="13" ry="8" fill="url(#pfJelly)"/>
+      <ellipse cx="0" cy="0" rx="8.5" ry="5" fill="url(#pfSeed)"/>
+      <circle cx="-2" cy="-1.5" r="1.5" fill="#ffffff" opacity="0.8"/>
+    </g>
+
+    <!-- Juicy Highlights -->
+    <ellipse cx="68" cy="62" rx="18" ry="8" transform="rotate(-30 68 62)" fill="#ffffff" opacity="0.35"/>
+    <circle cx="122" cy="74" r="3" fill="#ffffff" opacity="0.7"/>
+    <circle cx="82" cy="118" r="2.5" fill="#ffffff" opacity="0.6"/>
+  </g>
+</svg>

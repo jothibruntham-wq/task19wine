@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Strawberry Body Gradient -->
+    <radialGradient id="berryBody" cx="40%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#ff4d6d"/>
+      <stop offset="40%" stop-color="#e61c38"/>
+      <stop offset="75%" stop-color="#b80c24"/>
+      <stop offset="100%" stop-color="#670514"/>
+    </radialGradient>
+    <!-- Leaves / Calyx Gradient -->
+    <linearGradient id="berryLeaf" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="50%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#14532d"/>
+    </linearGradient>
+    <!-- Stem Gradient -->
+    <linearGradient id="berryStem" x1="0%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#15803d"/>
+      <stop offset="100%" stop-color="#166534"/>
+    </linearGradient>
+    <!-- Seed gradient -->
+    <linearGradient id="seedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="60%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+    <filter id="berryShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="8" stdDeviation="6" flood-color="#450a11" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#berryShadow)">
+    <!-- Stem -->
+    <path d="M97,32 C95,16 102,8 108,6 C110,12 105,22 102,32 Z" fill="url(#berryStem)"/>
+
+    <!-- Strawberry Body -->
+    <path d="M100,50 
+             C135,46 168,70 162,112 
+             C156,146 128,176 103,188 
+             C98,190 94,188 91,185 
+             C68,168 38,142 36,110 
+             C34,68 65,48 100,50 Z" 
+          fill="url(#berryBody)"/>
+
+    <!-- Surface Highlight Curve -->
+    <path d="M60,68 C76,56 102,54 116,58 C96,58 72,66 58,82 Z" fill="#ffffff" opacity="0.38"/>
+    <ellipse cx="68" cy="85" rx="14" ry="7" transform="rotate(-30 68 85)" fill="#ffffff" opacity="0.28"/>
+
+    <!-- Golden Seeds (Achenes) in Dimples -->
+    <!-- Helper macro: dimple circle, seed ellipse, micro highlight -->
+    <!-- Row 1 (top) -->
+    <g transform="translate(70, 72)"><ellipse cx="0" cy="0" rx="4" ry="2.5" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.5" ry="1.6" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(95, 70)"><ellipse cx="0" cy="0" rx="4" ry="2.5" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.5" ry="1.6" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(120, 72)"><ellipse cx="0" cy="0" rx="4" ry="2.5" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.5" ry="1.6" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(142, 82)"><ellipse cx="0" cy="0" rx="3.5" ry="2.2" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.2" ry="1.4" fill="url(#seedGrad)"/></g>
+
+    <!-- Row 2 -->
+    <g transform="translate(54, 94)"><ellipse cx="0" cy="0" rx="3.8" ry="2.3" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.4" ry="1.5" fill="url(#seedGrad)"/></g>
+    <g transform="translate(78, 92)"><ellipse cx="0" cy="0" rx="4.2" ry="2.6" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.6" ry="1.7" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(104, 90)"><ellipse cx="0" cy="0" rx="4.2" ry="2.6" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.6" ry="1.7" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(130, 94)"><ellipse cx="0" cy="0" rx="4.2" ry="2.6" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.6" ry="1.7" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(150, 108)"><ellipse cx="0" cy="0" rx="3.5" ry="2.2" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.2" ry="1.4" fill="url(#seedGrad)"/></g>
+
+    <!-- Row 3 -->
+    <g transform="translate(50, 120)"><ellipse cx="0" cy="0" rx="3.6" ry="2.2" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.3" ry="1.4" fill="url(#seedGrad)"/></g>
+    <g transform="translate(72, 116)"><ellipse cx="0" cy="0" rx="4.2" ry="2.6" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.6" ry="1.7" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(96, 115)"><ellipse cx="0" cy="0" rx="4.2" ry="2.6" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.6" ry="1.7" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(122, 118)"><ellipse cx="0" cy="0" rx="4.2" ry="2.6" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.6" ry="1.7" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(144, 130)"><ellipse cx="0" cy="0" rx="3.5" ry="2.2" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.2" ry="1.4" fill="url(#seedGrad)"/></g>
+
+    <!-- Row 4 -->
+    <g transform="translate(62, 142)"><ellipse cx="0" cy="0" rx="3.8" ry="2.4" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.4" ry="1.5" fill="url(#seedGrad)"/></g>
+    <g transform="translate(86, 138)"><ellipse cx="0" cy="0" rx="4" ry="2.5" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.5" ry="1.6" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(112, 140)"><ellipse cx="0" cy="0" rx="4" ry="2.5" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.5" ry="1.6" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.6" fill="#ffffff"/></g>
+    <g transform="translate(132, 150)"><ellipse cx="0" cy="0" rx="3.5" ry="2.2" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.2" ry="1.4" fill="url(#seedGrad)"/></g>
+
+    <!-- Row 5 (Tip) -->
+    <g transform="translate(78, 162)"><ellipse cx="0" cy="0" rx="3.5" ry="2.2" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.2" ry="1.4" fill="url(#seedGrad)"/></g>
+    <g transform="translate(100, 160)"><ellipse cx="0" cy="0" rx="3.8" ry="2.4" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2.4" ry="1.5" fill="url(#seedGrad)"/><circle cx="-0.8" cy="-0.8" r="0.5" fill="#ffffff"/></g>
+    <g transform="translate(118, 165)"><ellipse cx="0" cy="0" rx="3.2" ry="2" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="2" ry="1.3" fill="url(#seedGrad)"/></g>
+    <g transform="translate(98, 178)"><ellipse cx="0" cy="0" rx="3" ry="1.8" fill="#7f1d1d"/><ellipse cx="0" cy="-0.5" rx="1.8" ry="1.2" fill="url(#seedGrad)"/></g>
+
+    <!-- Lush Green Calyx / Leaves crown at top -->
+    <!-- Leaf 1 (Left far) -->
+    <path d="M96,44 C72,32 50,38 38,54 C52,58 72,56 94,48 Z" fill="url(#berryLeaf)"/>
+    <!-- Leaf 2 (Left center) -->
+    <path d="M98,45 C78,40 60,54 52,72 C68,68 84,60 98,48 Z" fill="url(#berryLeaf)"/>
+    <!-- Leaf 3 (Center) -->
+    <path d="M100,44 C96,62 92,76 100,86 C105,74 104,60 102,44 Z" fill="url(#berryLeaf)"/>
+    <!-- Leaf 4 (Right center) -->
+    <path d="M102,46 C116,56 132,68 148,68 C142,54 126,44 102,45 Z" fill="url(#berryLeaf)"/>
+    <!-- Leaf 5 (Right far) -->
+    <path d="M104,44 C128,34 148,36 164,50 C148,56 130,54 104,46 Z" fill="url(#berryLeaf)"/>
+
+    <!-- Leaf center knot -->
+    <ellipse cx="100" cy="46" rx="8" ry="5" fill="#15803d"/>
+  </g>
+</svg>
