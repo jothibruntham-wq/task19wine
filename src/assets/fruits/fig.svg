@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Skin Gradient -->
+    <radialGradient id="figSkin" cx="42%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#5a2755"/>
+      <stop offset="50%" stop-color="#3b173a"/>
+      <stop offset="80%" stop-color="#230d24"/>
+      <stop offset="100%" stop-color="#140616"/>
+    </radialGradient>
+    <!-- Pith Gradient -->
+    <radialGradient id="figPith" cx="48%" cy="50%" r="58%">
+      <stop offset="78%" stop-color="#fff5f5"/>
+      <stop offset="92%" stop-color="#f8d7da"/>
+      <stop offset="100%" stop-color="#d99b9b"/>
+    </radialGradient>
+    <!-- Flesh / Jammy Core Gradient -->
+    <radialGradient id="figFlesh" cx="50%" cy="52%" r="50%">
+      <stop offset="0%" stop-color="#e63946"/>
+      <stop offset="35%" stop-color="#c9184a"/>
+      <stop offset="70%" stop-color="#800f2f"/>
+      <stop offset="100%" stop-color="#590d22"/>
+    </radialGradient>
+    <!-- Stem Gradient -->
+    <linearGradient id="figStem" x1="0%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#4a5320"/>
+      <stop offset="60%" stop-color="#606c38"/>
+      <stop offset="100%" stop-color="#38401a"/>
+    </linearGradient>
+    <filter id="figShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="8" stdDeviation="6" flood-color="#140417" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#figShadow)">
+    <!-- Stem at top -->
+    <path d="M96,36 C93,20 102,12 108,10 C111,15 106,24 104,36 Z" fill="url(#figStem)"/>
+
+    <!-- Fig Silhouette / Outer Skin -->
+    <path d="M100,34 
+             C120,44 146,75 158,106 
+             C168,134 154,166 128,180 
+             C110,189 88,189 70,180 
+             C44,166 32,134 42,106 
+             C54,75 80,44 100,34 Z" 
+          fill="url(#figSkin)"/>
+
+    <!-- Bloom / Highlight on skin edge -->
+    <path d="M48,100 C40,126 48,152 70,172 C52,152 46,128 54,104 Z" fill="#9d4edd" opacity="0.35"/>
+
+    <!-- Pale Pith Layer -->
+    <path d="M100,44 
+             C117,53 138,78 147,106 
+             C155,130 142,156 122,168 
+             C108,175 92,175 78,168 
+             C58,156 45,130 53,106 
+             C62,78 83,53 100,44 Z" 
+          fill="url(#figPith)"/>
+
+    <!-- Jammy Red Interior -->
+    <path d="M100,52 
+             C114,60 131,82 139,106 
+             C146,127 134,149 118,159 
+             C106,165 94,165 82,159 
+             C66,149 54,127 61,106 
+             C69,82 86,60 100,52 Z" 
+          fill="url(#figFlesh)"/>
+
+    <!-- Seed Texture Fibers / Radiating Rays -->
+    <g stroke="#ffccd5" stroke-linecap="round" opacity="0.65">
+      <!-- Radiating lines towards center cavity -->
+      <line x1="80" y1="85" x2="94" y2="98" stroke-width="1.8"/>
+      <line x1="120" y1="85" x2="106" y2="98" stroke-width="1.8"/>
+      <line x1="72" y1="108" x2="90" y2="108" stroke-width="1.8"/>
+      <line x1="128" y1="108" x2="110" y2="108" stroke-width="1.8"/>
+      <line x1="76" y1="130" x2="92" y2="120" stroke-width="1.8"/>
+      <line x1="124" y1="130" x2="108" y2="120" stroke-width="1.8"/>
+      <line x1="88" y1="150" x2="97" y2="132" stroke-width="1.8"/>
+      <line x1="112" y1="150" x2="103" y2="132" stroke-width="1.8"/>
+      <line x1="100" y1="62" x2="100" y2="82" stroke-width="2"/>
+    </g>
+
+    <!-- Seed Specks -->
+    <g fill="#ffe5b4">
+      <circle cx="92" cy="90" r="1.8"/>
+      <circle cx="108" cy="88" r="1.7"/>
+      <circle cx="85" cy="102" r="1.6"/>
+      <circle cx="115" cy="100" r="1.8"/>
+      <circle cx="95" cy="108" r="2.2" fill="#fff0f5"/>
+      <circle cx="105" cy="112" r="2" fill="#fff0f5"/>
+      <circle cx="88" cy="120" r="1.7"/>
+      <circle cx="112" cy="122" r="1.8"/>
+      <circle cx="98" cy="128" r="1.9"/>
+      <circle cx="104" cy="138" r="1.6"/>
+      <circle cx="93" cy="142" r="1.5"/>
+      <circle cx="80" cy="115" r="1.6"/>
+      <circle cx="120" cy="114" r="1.7"/>
+      <circle cx="99" cy="74" r="1.5"/>
+    </g>
+
+    <!-- Center Deep Seed Crevice -->
+    <ellipse cx="100" cy="112" rx="10" ry="16" fill="#480ca8" opacity="0.45"/>
+    <ellipse cx="100" cy="114" rx="6" ry="11" fill="#7209b7" opacity="0.6"/>
+
+    <!-- Delicate Gloss Highlights -->
+    <path d="M85,65 Q98,54 112,64" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.55"/>
+    <circle cx="96" cy="104" r="2.5" fill="#ffffff" opacity="0.8"/>
+    <circle cx="106" cy="106" r="2" fill="#ffffff" opacity="0.8"/>
+  </g>
+</svg>

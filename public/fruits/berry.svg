@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Berry drupelet gradient -->
+    <radialGradient id="drupeletGrad" cx="35%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#b5179e"/>
+      <stop offset="35%" stop-color="#7209b7"/>
+      <stop offset="70%" stop-color="#3a0ca3"/>
+      <stop offset="100%" stop-color="#14012b"/>
+    </radialGradient>
+    <!-- Drupelet highlight -->
+    <radialGradient id="drupeletLight" cx="35%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#f72585"/>
+      <stop offset="50%" stop-color="#7209b7"/>
+      <stop offset="100%" stop-color="#240046"/>
+    </radialGradient>
+    <!-- Leaves Gradient -->
+    <linearGradient id="berryClusterLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="50%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#14532d"/>
+    </linearGradient>
+    <filter id="berryClustShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="8" stdDeviation="6" flood-color="#1b032e" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#berryClustShadow)">
+    <!-- Leaves at top -->
+    <path d="M100,42 C80,22 60,30 52,48 C68,48 85,46 98,44 Z" fill="url(#berryClusterLeaf)"/>
+    <path d="M102,42 C122,20 144,28 152,46 C136,46 118,45 104,44 Z" fill="url(#berryClusterLeaf)"/>
+    <path d="M100,42 C104,18 96,8 90,6 C92,14 96,28 100,42 Z" fill="#15803d"/>
+
+    <!-- Cluster of Drupelets (arranged in layers) -->
+    <!-- Layer 1 (Back / Outer) -->
+    <circle cx="70" cy="74" r="19" fill="url(#drupeletGrad)"/>
+    <circle cx="130" cy="74" r="19" fill="url(#drupeletGrad)"/>
+    <circle cx="56" cy="104" r="19" fill="url(#drupeletGrad)"/>
+    <circle cx="144" cy="104" r="19" fill="url(#drupeletGrad)"/>
+    <circle cx="62" cy="136" r="18" fill="url(#drupeletGrad)"/>
+    <circle cx="138" cy="136" r="18" fill="url(#drupeletGrad)"/>
+    <circle cx="80" cy="166" r="16" fill="url(#drupeletGrad)"/>
+    <circle cx="120" cy="166" r="16" fill="url(#drupeletGrad)"/>
+    <circle cx="100" cy="178" r="14" fill="url(#drupeletGrad)"/>
+
+    <!-- Layer 2 (Middle) -->
+    <circle cx="82" cy="62" r="18" fill="url(#drupeletLight)"/>
+    <circle cx="118" cy="62" r="18" fill="url(#drupeletLight)"/>
+    <circle cx="100" cy="54" r="17" fill="url(#drupeletLight)"/>
+    <circle cx="76" cy="98" r="19" fill="url(#drupeletLight)"/>
+    <circle cx="124" cy="98" r="19" fill="url(#drupeletLight)"/>
+    <circle cx="78" cy="132" r="18" fill="url(#drupeletLight)"/>
+    <circle cx="122" cy="132" r="18" fill="url(#drupeletLight)"/>
+    <circle cx="100" cy="154" r="17" fill="url(#drupeletLight)"/>
+
+    <!-- Layer 3 (Center foreground) -->
+    <circle cx="100" cy="80" r="20" fill="url(#drupeletLight)"/>
+    <circle cx="100" cy="116" r="20" fill="url(#drupeletLight)"/>
+
+    <!-- Specular pearl shine dots on front spheres -->
+    <circle cx="94" cy="74" r="4.5" fill="#ffffff" opacity="0.8"/>
+    <circle cx="94" cy="110" r="4.5" fill="#ffffff" opacity="0.8"/>
+    <circle cx="72" cy="92" r="4" fill="#ffffff" opacity="0.75"/>
+    <circle cx="120" cy="92" r="4" fill="#ffffff" opacity="0.75"/>
+    <circle cx="76" cy="56" r="3.5" fill="#ffffff" opacity="0.75"/>
+    <circle cx="114" cy="56" r="3.5" fill="#ffffff" opacity="0.75"/>
+    <circle cx="96" cy="48" r="3.5" fill="#ffffff" opacity="0.75"/>
+    <circle cx="74" cy="126" r="3.5" fill="#ffffff" opacity="0.7"/>
+    <circle cx="118" cy="126" r="3.5" fill="#ffffff" opacity="0.7"/>
+    <circle cx="96" cy="148" r="3.5" fill="#ffffff" opacity="0.75"/>
+    <circle cx="52" cy="98" r="3.5" fill="#ffffff" opacity="0.6"/>
+    <circle cx="140" cy="98" r="3.5" fill="#ffffff" opacity="0.6"/>
+  </g>
+</svg>

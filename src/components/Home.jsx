@@ -1,443 +1,854 @@
 import { useEffect, useRef, useState } from "react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCreative, Mousewheel } from "swiper/modules";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  Autoplay,
+  EffectFade,
+  Keyboard,
+  Mousewheel,
+  Navigation,
+} from "swiper/modules";
+
+import { AnimatePresence, motion } from "framer-motion";
 import gsap from "gsap";
 
 import "swiper/css";
-import "swiper/css/effect-creative";
+import "swiper/css/effect-fade";
 import "../assets/style/style.css";
 
-import bottleClassic from "../assets/images/wine-bottle.png";
-import bottleRed from "../assets/images/wine-bottle-red.png";
-import bottleGold from "../assets/images/wine-bottle-gold.png";
-import bottleGreen from "../assets/images/wine-bottle-green.png";
 import bottleExotic from "../assets/images/wine-bottle-exotic.png";
+import bottleVelvet from "../assets/images/wine-bottle-red.png";
+import bottleGold from "../assets/images/wine-bottle-gold.png";
+import bottleSparkling from "../assets/images/wine-bottle.png";
+import bottleCitrus from "../assets/images/wine-bottle-green.png";
 
-const wines = [
+import fruitPassion from "../assets/fruits/passionfruit.svg";
+import fruitFig from "../assets/fruits/fig.svg";
+import fruitLime from "../assets/fruits/lime.svg";
+import fruitStrawberry from "../assets/fruits/strawberry.svg";
+import fruitLemon from "../assets/fruits/lemon.svg";
+
+/* =========================================================
+   WINE DATA
+   ========================================================= */
+
+const WINES = [
   {
-    id: 0,
-    name: "Classic.",
-    subtitle: "A timeless wine experience",
-    background: "#bca9ff",
-    bottle: bottleClassic,
-    fruits: ["🍋", "🍋"],
-    accent: "#ffffff",
-  },
-  {
-    id: 1,
-    name: "Velvet.",
-    subtitle: "Smooth. Rich. Elegant.",
-    background: "#ee7088",
-    bottle: bottleRed,
-    fruits: ["🍒", "🍒"],
-    accent: "#ffffff",
-  },
-  {
-    id: 2,
-    name: "Golden.",
-    subtitle: "Bright golden character",
-    background: "#ffdc7b",
-    bottle: bottleGold,
-    fruits: ["🍋", "🍋"],
-    accent: "#ffffff",
-  },
-  {
-    id: 3,
-    name: "Fresh.",
-    subtitle: "Light and refreshing",
-    background: "#91d1b7",
-    bottle: bottleGreen,
-    fruits: ["🍃", "🍃"],
-    accent: "#ffffff",
-  },
-  {
-    id: 4,
-    name: "Exotic.",
-    subtitle: "Discover something different",
-    background: "#81e11b",
+    id: "exotic",
+    title: "Exotic",
+
+    bg: "#c9b8ff",
+    modalBg: "#2f2b57",
+
     bottle: bottleExotic,
-    fruits: ["🍊", "🍊"],
-    accent: "#ffffff",
+    fruit: fruitPassion,
+
+    varietal: "Chenin Blanc, Viognier",
+    abv: "12.5%",
+    vintage: "2022",
+
+    tags: [
+      "Passion fruit",
+      "Mango",
+      "Honey",
+      "Apricot",
+    ],
+
+    notes:
+      "Ripe tropical fruit with a silky, honeyed finish. Serve chilled.",
+  },
+
+  {
+    id: "velvet",
+    title: "Velvet",
+
+    bg: "#ee7589",
+    modalBg: "#4a2433",
+
+    bottle: bottleVelvet,
+    fruit: fruitFig,
+
+    varietal: "Merlot, Malbec",
+    abv: "14%",
+    vintage: "2020",
+
+    tags: [
+      "Black fig",
+      "Plum",
+      "Cocoa",
+      "Vanilla",
+    ],
+
+    notes:
+      "Soft tannins and dark fruit. Decant for 30 minutes before pouring.",
+  },
+
+  {
+    id: "golden",
+    title: "Golden",
+
+    bg: "#ffd98a",
+    modalBg: "#47391c",
+
+    bottle: bottleGold,
+    fruit: fruitLime,
+
+    varietal: "Chardonnay",
+    abv: "13%",
+    vintage: "2021",
+
+    tags: [
+      "Lime zest",
+      "Pear",
+      "Butter",
+      "Oak",
+    ],
+
+    notes:
+      "Round and bright, with a clean mineral edge.",
+  },
+
+  {
+    id: "sparkling",
+    title: "Sparkling",
+
+    bg: "#ffc8b0",
+    modalBg: "#4a2f2f",
+
+    bottle: bottleSparkling,
+    fruit: fruitStrawberry,
+
+    varietal: "Pinot Noir, Chardonnay",
+    abv: "11.5%",
+    vintage: "NV",
+
+    tags: [
+      "Strawberry",
+      "Brioche",
+      "Citrus",
+      "Fine bubbles",
+    ],
+
+    notes:
+      "Lively mousse with red berry freshness. Best served very cold.",
+  },
+
+  {
+    id: "citrus",
+    title: "Citrus",
+
+    bg: "#93cfb0",
+    modalBg: "#1f3d34",
+
+    bottle: bottleCitrus,
+    fruit: fruitLemon,
+
+    varietal: "Sauvignon Blanc",
+    abv: "12%",
+    vintage: "2023",
+
+    tags: [
+      "Lemon",
+      "Lime",
+      "Green apple",
+      "Herbs",
+    ],
+
+    notes:
+      "Crisp, zesty and mouth-watering. Pairs with seafood and salads.",
   },
 ];
 
+/* =========================================================
+   AUTOPLAY
+   ========================================================= */
+
+const AUTOPLAY_MS = 3200;
+
+/* =========================================================
+   TITLE LETTERS
+   ========================================================= */
+
+const Letters = ({ text }) => (
+  <span className="title-mask" aria-label={text}>
+    {text.split("").map((char, index) => (
+      <span
+        className="char"
+        key={index}
+        aria-hidden="true"
+      >
+        {char}
+      </span>
+    ))}
+
+    <span
+      className="char"
+      aria-hidden="true"
+    >
+      .
+    </span>
+  </span>
+);
+
+/* =========================================================
+   HOME
+   ========================================================= */
+
 export default function Home() {
+  const rootRef = useRef(null);
   const swiperRef = useRef(null);
-  const stageRef = useRef(null);
+  const prevIndex = useRef(null);
 
-  const [swiperSlideIndex, setSwiperSlideIndex] = useState(0);
-  const [activeWine, setActiveWine] = useState(wines[0]);
+  const [active, setActive] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [cycle, setCycle] = useState(0);
 
-  /*
-   * GSAP animation for every slide
-   */
-  const animateSlide = (swiper, index) => {
-    const slide = swiper.slides[index];
+  /* =======================================================
+     GSAP SLIDE ANIMATION
+     ======================================================= */
 
-    if (!slide) return;
-
-    const bottle = slide.querySelector(".wine-bottle");
-    const title = slide.querySelector(".wine-title");
-    const subtitle = slide.querySelector(".wine-subtitle");
-    const fruitItems = slide.querySelectorAll(".fruit");
-    const line = slide.querySelector(".bottom-line");
-
-    // Kill previous animations
-    gsap.killTweensOf([
-      bottle,
-      title,
-      subtitle,
-      fruitItems,
-      line,
-    ]);
-
-    // Initial position
-    gsap.set(bottle, {
-      y: 40,
-      scale: 0.75,
-      rotate: -5,
-      opacity: 0,
-    });
-
-    gsap.set(title, {
-      y: 50,
-      opacity: 0,
-      scale: 0.9,
-    });
-
-    gsap.set(subtitle, {
-      y: 25,
-      opacity: 0,
-    });
-
-    gsap.set(fruitItems, {
-      scale: 0,
-      opacity: 0,
-    });
-
-    gsap.set(line, {
-      scaleX: 0,
-      transformOrigin: "center",
-    });
-
-    /*
-     * Bottle animation
-     */
-    gsap.to(bottle, {
-      y: 0,
-      scale: 1,
-      rotate: 0,
-      opacity: 1,
-      duration: 0.85,
-      ease: "back.out(1.6)",
-    });
-
-    /*
-     * Main title
-     */
-    gsap.to(title, {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      duration: 0.75,
-      delay: 0.12,
-      ease: "power3.out",
-    });
-
-    /*
-     * Subtitle
-     */
-    gsap.to(subtitle, {
-      y: 0,
-      opacity: 1,
-      duration: 0.55,
-      delay: 0.28,
-      ease: "power2.out",
-    });
-
-    /*
-     * Fruit animation
-     */
-    gsap.to(fruitItems, {
-      scale: 1,
-      opacity: 1,
-      duration: 0.65,
-      delay: 0.25,
-      stagger: 0.12,
-      ease: "back.out(2)",
-    });
-
-    /*
-     * Bottom line
-     */
-    gsap.to(line, {
-      scaleX: 1,
-      duration: 0.6,
-      delay: 0.35,
-      ease: "power2.out",
-    });
-
-    /*
-     * Continuous bottle floating
-     */
-    gsap.to(bottle, {
-      y: -8,
-      duration: 1.8,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      delay: 0.9,
-    });
-  };
-
-  /*
-   * Swiper slide changed
-   */
-  const handleSlideChange = (swiper) => {
-    const index = swiper.realIndex;
-
-    setSwiperSlideIndex(index);
-    setActiveWine(wines[index]);
-
-    animateSlide(swiper, index);
-  };
-
-  /*
-   * First animation
-   */
   useEffect(() => {
-    if (!swiperRef.current) return;
+    const ctx = gsap.context(() => {
+      const prev = prevIndex.current;
 
-    const timer = setTimeout(() => {
-      animateSlide(swiperRef.current, 0);
-    }, 100);
+      /* ---------------------------------------------------
+         OUTGOING SLIDE
+         --------------------------------------------------- */
 
-    return () => clearTimeout(timer);
-  }, []);
+      if (prev !== null && prev !== active) {
+        gsap.to(
+          `.slide-${prev} .bottle-img`,
+          {
+            yPercent: -35,
+            rotate: 14,
+            opacity: 0,
+            duration: 0.6,
+            ease: "power3.in",
+          }
+        );
 
-  /*
-   * Keyboard controls
-   */
-  useEffect(() => {
-    const handleKeyboard = (event) => {
-      if (!swiperRef.current) return;
+        gsap.to(
+          `.slide-${prev} .char`,
+          {
+            yPercent: -110,
+            duration: 0.5,
+            stagger: 0.02,
+            ease: "power3.in",
+          }
+        );
 
-      if (event.key === "ArrowRight") {
-        swiperRef.current.slideNext();
+        gsap.to(
+          `.slide-${prev} .fruit`,
+          {
+            scale: 0,
+            duration: 0.4,
+            ease: "back.in(2)",
+          }
+        );
       }
 
-      if (event.key === "ArrowLeft") {
-        swiperRef.current.slidePrev();
+      /* ---------------------------------------------------
+         INCOMING TIMELINE
+         --------------------------------------------------- */
+
+      const tl = gsap.timeline({
+        delay: prev === null ? 0.2 : 0.25,
+      });
+
+      /* Bottle */
+
+      tl.fromTo(
+        `.slide-${active} .bottle-img`,
+
+        {
+          yPercent: 45,
+          rotate: -16,
+          opacity: 0,
+          scale: 0.92,
+        },
+
+        {
+          yPercent: 0,
+          rotate: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.1,
+          ease: "power4.out",
+        },
+
+        0
+      )
+
+        /* Title */
+
+        .fromTo(
+          `.slide-${active} .char`,
+
+          {
+            yPercent: 110,
+          },
+
+          {
+            yPercent: 0,
+            duration: 0.9,
+            stagger: 0.05,
+            ease: "power4.out",
+          },
+
+          0.1
+        )
+
+        /* Fruits */
+
+        .fromTo(
+          `.slide-${active} .fruit`,
+
+          {
+            scale: 0,
+            rotate: -120,
+          },
+
+          {
+            scale: 1,
+            rotate: 0,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: "back.out(1.8)",
+          },
+
+          0.35
+        );
+
+      /* ---------------------------------------------------
+         FLOATING SVG FRUITS
+         --------------------------------------------------- */
+
+      gsap.to(
+        `.slide-${active} .fruit-inner`,
+        {
+          y: "random(-14, 14)",
+          x: "random(-8, 8)",
+          rotate: "random(-12, 12)",
+          duration: "random(1.8, 2.6)",
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+          repeatRefresh: true,
+          stagger: 0.3,
+        }
+      );
+
+      /* ---------------------------------------------------
+         FLOATING BOTTLE
+         --------------------------------------------------- */
+
+      gsap.to(
+        `.slide-${active} .bottle-float`,
+        {
+          y: -10,
+          duration: 2.2,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+        }
+      );
+    }, rootRef);
+
+    prevIndex.current = active;
+
+    return () => ctx.revert();
+  }, [active]);
+
+  /* =======================================================
+     STOP AUTOPLAY WHEN MODAL IS OPEN
+     ======================================================= */
+
+  useEffect(() => {
+    const swiper = swiperRef.current;
+
+    if (!swiper || !swiper.autoplay) {
+      return;
+    }
+
+    if (open) {
+      swiper.autoplay.stop();
+    } else {
+      swiper.autoplay.start();
+    }
+  }, [open]);
+
+  /* =======================================================
+     ESC CLOSE MODAL
+     ======================================================= */
+
+  useEffect(() => {
+    const onKey = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
       }
     };
 
-    window.addEventListener("keydown", handleKeyboard);
+    window.addEventListener(
+      "keydown",
+      onKey
+    );
 
     return () => {
-      window.removeEventListener("keydown", handleKeyboard);
+      window.removeEventListener(
+        "keydown",
+        onKey
+      );
     };
   }, []);
 
-  /*
-   * Automatic carousel
-   */
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (swiperRef.current) {
-        swiperRef.current.slideNext();
-      }
-    }, 4200);
+  const wine = WINES[active];
 
-    return () => clearInterval(interval);
-  }, []);
+  /* =======================================================
+     JSX
+     ======================================================= */
 
   return (
     <main
-      ref={stageRef}
-      className="wine-page"
-      style={{
-        "--active-background": activeWine.background,
-      }}
+      className="home"
+      ref={rootRef}
     >
-      <div className="wine-frame">
+      {/* =================================================
+          SWIPER
+          ================================================= */}
 
-        {/* Background transition */}
-        <AnimatePresence mode="sync">
-          <motion.div
-            key={activeWine.id}
-            className="background-layer"
+      <Swiper
+        modules={[
+          Autoplay,
+          EffectFade,
+          Keyboard,
+          Mousewheel,
+          Navigation,
+        ]}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
+        onSlideChange={(swiper) => {
+          setActive(swiper.realIndex);
+          setCycle((count) => count + 1);
+        }}
+        effect="fade"
+        fadeEffect={{
+          crossFade: true,
+        }}
+        speed={900}
+        loop
+        autoplay={{
+          delay: AUTOPLAY_MS,
+          disableOnInteraction: false,
+        }}
+        keyboard={{
+          enabled: true,
+        }}
+        mousewheel={{
+          forceToAxis: true,
+          thresholdDelta: 20,
+          releaseOnEdges: false,
+        }}
+        navigation={{
+          prevEl: ".nav-prev",
+          nextEl: ".nav-next",
+        }}
+        className="wine-swiper"
+      >
+        {WINES.map((wineItem, index) => (
+          <SwiperSlide
+            key={wineItem.id}
+            className={`slide slide-${index}`}
             style={{
-              background: activeWine.background,
+              background: wineItem.bg,
+            }}
+          >
+            {/* ==========================================
+                4 SIDES SVG FRUITS
+                ========================================== */}
+
+            {/* TOP-LEFT SVG FRUIT */}
+            <div className="fruit fruit-tl fruit-left">
+              <img
+                className="fruit-inner"
+                src={wineItem.fruit}
+                alt=""
+                draggable="false"
+              />
+            </div>
+
+            {/* TOP-RIGHT SVG FRUIT */}
+            <div className="fruit fruit-tr fruit-right">
+              <img
+                className="fruit-inner"
+                src={wineItem.fruit}
+                alt=""
+                draggable="false"
+              />
+            </div>
+
+            {/* BOTTOM-LEFT SVG FRUIT */}
+            <div className="fruit fruit-bl fruit-bottom-left">
+              <img
+                className="fruit-inner"
+                src={wineItem.fruit}
+                alt=""
+                draggable="false"
+              />
+            </div>
+
+            {/* BOTTOM-RIGHT SVG FRUIT */}
+            <div className="fruit fruit-br fruit-bottom-right">
+              <img
+                className="fruit-inner"
+                src={wineItem.fruit}
+                alt=""
+                draggable="false"
+              />
+            </div>
+
+            {/* ==========================================
+                BIG TITLE
+                ========================================== */}
+
+            <h1 className="title">
+              <Letters
+                text={wineItem.title}
+              />
+            </h1>
+
+            {/* ==========================================
+                BOTTLE
+                ========================================== */}
+
+            <button
+              className="bottle"
+              onClick={() => setOpen(true)}
+              aria-label={`Open ${wineItem.title} details`}
+            >
+              {!(
+                open &&
+                active === index
+              ) && (
+                <motion.div
+                  layoutId={`bottle-${wineItem.id}`}
+                  className="bottle-motion"
+                >
+                  <div className="bottle-float">
+                    <img
+                      className="bottle-img"
+                      src={wineItem.bottle}
+                      alt={`${wineItem.title} wine bottle`}
+                      draggable="false"
+                    />
+                  </div>
+                </motion.div>
+              )}
+            </button>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* =================================================
+          PREVIOUS BUTTON
+          ================================================= */}
+
+      <button
+        className="nav nav-prev"
+        aria-label="Previous wine"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+        >
+          <path
+            d="M15 5l-7 7 7 7"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+
+      {/* =================================================
+          NEXT BUTTON
+          ================================================= */}
+
+      <button
+        className="nav nav-next"
+        aria-label="Next wine"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+        >
+          <path
+            d="M9 5l7 7-7 7"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+
+      {/* =================================================
+          PROGRESS
+          ================================================= */}
+
+      <div
+        className="progress"
+        aria-hidden="true"
+      >
+        <motion.span
+          key={cycle}
+          className="progress-bar"
+          initial={{
+            scaleX: 0,
+          }}
+          animate={{
+            scaleX: open ? 0 : 1,
+          }}
+          transition={{
+            duration: AUTOPLAY_MS / 1000,
+            ease: "linear",
+          }}
+        />
+      </div>
+
+      {/* =================================================
+          DETAILS MODAL
+          ================================================= */}
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="backdrop"
+            style={{
+              background: `${wine.modalBg}e6`,
             }}
             initial={{
               opacity: 0,
-              scale: 1.08,
             }}
             animate={{
               opacity: 1,
-              scale: 1,
             }}
             exit={{
               opacity: 0,
-              scale: 0.98,
             }}
             transition={{
-              duration: 0.65,
-              ease: "easeInOut",
+              duration: 0.35,
             }}
-          />
-        </AnimatePresence>
+            onClick={() => setOpen(false)}
+          >
+            <motion.section
+              className="modal"
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${wine.title} details`}
+              initial={{
+                opacity: 0,
+                y: 40,
+                scale: 0.94,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                y: 40,
+                scale: 0.94,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 26,
+              }}
+              onClick={(event) =>
+                event.stopPropagation()
+              }
+            >
+              {/* CLOSE */}
 
-        {/* Top branding */}
-        <div className="top-bar">
-          <div className="logo">
-            WINE<span>°</span>
-          </div>
+              <button
+                className="modal-close"
+                onClick={() => setOpen(false)}
+                aria-label="Close"
+              >
+                ×
+              </button>
 
-          <div className="slide-counter">
-            {String(swiperSlideIndex + 1).padStart(2, "0")} /
-            {" "}
-            {String(wines.length).padStart(2, "0")}
-          </div>
-        </div>
+              {/* MODAL BOTTLE */}
 
-        {/* Main Swiper */}
-        <Swiper
-          className="wine-swiper"
-          modules={[EffectCreative, Mousewheel]}
-          effect="creative"
-          speed={1000}
-          slidesPerView={1}
-          centeredSlides={true}
-          loop={true}
-          grabCursor={true}
-          mousewheel={{
-            forceToAxis: true,
-            sensitivity: 0.7,
-          }}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          onSlideChange={handleSlideChange}
-          creativeEffect={{
-            prev: {
-              translate: ["-110%", 0, -250],
-              rotate: [0, -8, 0],
-              opacity: 0,
-            },
-            next: {
-              translate: ["110%", 0, -250],
-              rotate: [0, 8, 0],
-              opacity: 0,
-            },
-          }}
-        >
-          {wines.map((wine) => (
-            <SwiperSlide key={wine.id}>
-              <div className="wine-slide">
-
-                {/* Floating decorations */}
-                <div className="fruit fruit-left">
-                  {wine.fruits[0]}
-                </div>
-
-                <div className="fruit fruit-right">
-                  {wine.fruits[1]}
-                </div>
-
-                <div className="fruit fruit-small-left">
-                  ✦
-                </div>
-
-                <div className="fruit fruit-small-right">
-                  ✦
-                </div>
-
-                {/* Large title */}
-                <motion.h1
-                  className="wine-title"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
+              <div className="modal-bottle">
+                <motion.div
+                  layoutId={`bottle-${wine.id}`}
+                  className="modal-bottle-motion"
                 >
-                  {wine.name}
-                </motion.h1>
-
-                {/* Bottle */}
-                <div className="bottle-container">
                   <img
-                    className="wine-bottle"
                     src={wine.bottle}
-                    alt={wine.name}
+                    alt={`${wine.title} wine bottle`}
                     draggable="false"
-                    onLoad={(event) => {
-                      gsap.fromTo(
-                        event.currentTarget,
-                        {
-                          opacity: 0,
-                          scale: 0.8,
-                        },
-                        {
-                          opacity: 1,
-                          scale: 1,
-                          duration: 0.8,
-                          ease: "back.out(1.5)",
-                        }
-                      );
-                    }}
                   />
-                </div>
-
-                {/* Subtitle */}
-                <div className="wine-subtitle">
-                  {wine.subtitle}
-                </div>
-
-                {/* Bottom indicator */}
-                <div className="bottom-line" />
-
+                </motion.div>
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
 
-        {/* Bottom controls */}
-        <div className="bottom-controls">
+              {/* MODAL CONTENT */}
 
-          <button
-            className="nav-button"
-            onClick={() => swiperRef.current?.slidePrev()}
-          >
-            ←
-          </button>
+              <div className="modal-body">
+                <motion.h2
+                  initial={{
+                    opacity: 0,
+                    y: 14,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    delay: 0.15,
+                  }}
+                >
+                  {wine.title}
+                </motion.h2>
 
-          <div className="progress-container">
-            {wines.map((wine, index) => (
-              <span
-                key={wine.id}
-                className={
-                  index === swiperSlideIndex
-                    ? "progress-dot active"
-                    : "progress-dot"
-                }
-                onClick={() =>
-                  swiperRef.current?.slideToLoop(index)
-                }
-              />
-            ))}
-          </div>
+                <motion.p
+                  className="modal-sub"
+                  initial={{
+                    opacity: 0,
+                  }}
+                  animate={{
+                    opacity: 1,
+                  }}
+                  transition={{
+                    delay: 0.2,
+                  }}
+                >
+                  {wine.notes}
+                </motion.p>
 
-          <button
-            className="nav-button"
-            onClick={() => swiperRef.current?.slideNext()}
-          >
-            →
-          </button>
+                {/* STATS */}
 
-        </div>
+                <motion.div
+                  className="stats"
+                  initial="hidden"
+                  animate="show"
+                  variants={{
+                    show: {
+                      transition: {
+                        staggerChildren: 0.07,
+                        delayChildren: 0.25,
+                      },
+                    },
+                  }}
+                >
+                  {[
+                    [
+                      "Varietal",
+                      wine.varietal,
+                    ],
+                    [
+                      "ABV",
+                      wine.abv,
+                    ],
+                    [
+                      "Vintage",
+                      wine.vintage,
+                    ],
+                  ].map(
+                    ([label, value]) => (
+                      <motion.div
+                        className="stat"
+                        key={label}
+                        variants={{
+                          hidden: {
+                            opacity: 0,
+                            y: 12,
+                          },
+                          show: {
+                            opacity: 1,
+                            y: 0,
+                          },
+                        }}
+                      >
+                        <span className="stat-label">
+                          {label}
+                        </span>
 
-      </div>
+                        <strong>
+                          {value}
+                        </strong>
+                      </motion.div>
+                    )
+                  )}
+                </motion.div>
+
+                {/* TAGS */}
+
+                <motion.ul
+                  className="tags"
+                  initial="hidden"
+                  animate="show"
+                  variants={{
+                    show: {
+                      transition: {
+                        staggerChildren: 0.05,
+                        delayChildren: 0.4,
+                      },
+                    },
+                  }}
+                >
+                  {wine.tags.map(
+                    (tag) => (
+                      <motion.li
+                        key={tag}
+                        variants={{
+                          hidden: {
+                            opacity: 0,
+                            scale: 0.8,
+                          },
+                          show: {
+                            opacity: 1,
+                            scale: 1,
+                          },
+                        }}
+                      >
+                        {tag}
+                      </motion.li>
+                    )
+                  )}
+                </motion.ul>
+
+                {/* CTA */}
+
+                <motion.button
+                  className="cta"
+                  whileHover={{
+                    scale: 1.03,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
+                  onClick={() =>
+                    alert(
+                      `${wine.title} added to cart`
+                    )
+                  }
+                >
+                  Add to cart
+                </motion.button>
+              </div>
+            </motion.section>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
