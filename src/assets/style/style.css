@@ -168,6 +168,8 @@ body {
 
   align-items: flex-end;
 
+  perspective: 1200px;
+
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -181,6 +183,7 @@ body {
 .bottle-motion,
 .bottle-float {
   height: 100%;
+  transform-style: preserve-3d;
 }
 
 .bottle-img {
@@ -190,6 +193,9 @@ body {
   display: block;
 
   object-fit: contain;
+
+  transform-origin: 50% 85%;
+  transform-style: preserve-3d;
 
   filter:
     drop-shadow(

@@ -211,19 +211,32 @@ export default function Home() {
     const ctx = gsap.context(() => {
       const prev = prevIndex.current;
 
+      /* Calculate direction of slide movement */
+      let direction = 1;
+      if (prev !== null) {
+        if (active > prev) {
+          direction = active === WINES.length - 1 && prev === 0 ? -1 : 1;
+        } else if (active < prev) {
+          direction = active === 0 && prev === WINES.length - 1 ? 1 : -1;
+        }
+      }
+
       /* ---------------------------------------------------
-         OUTGOING SLIDE
+         OUTGOING SLIDE - BOTTLE ROTATES OUT
          --------------------------------------------------- */
 
       if (prev !== null && prev !== active) {
         gsap.to(
           `.slide-${prev} .bottle-img`,
           {
-            yPercent: -35,
-            rotate: 14,
+            rotate: 65 * direction,
+            rotateY: 45 * direction,
+            xPercent: 35 * direction,
+            yPercent: -15,
             opacity: 0,
-            duration: 0.6,
-            ease: "power3.in",
+            scale: 0.8,
+            duration: 0.65,
+            ease: "power2.in",
           }
         );
 
@@ -248,32 +261,36 @@ export default function Home() {
       }
 
       /* ---------------------------------------------------
-         INCOMING TIMELINE
+         INCOMING TIMELINE - BOTTLE ROTATES IN
          --------------------------------------------------- */
 
       const tl = gsap.timeline({
-        delay: prev === null ? 0.2 : 0.25,
+        delay: prev === null ? 0.15 : 0.2,
       });
 
-      /* Bottle */
+      /* Bottle Rotating Transition */
 
       tl.fromTo(
         `.slide-${active} .bottle-img`,
 
         {
-          yPercent: 45,
-          rotate: -16,
+          rotate: -75 * direction,
+          rotateY: -45 * direction,
+          xPercent: -35 * direction,
+          yPercent: 20,
           opacity: 0,
-          scale: 0.92,
+          scale: 0.82,
         },
 
         {
-          yPercent: 0,
           rotate: 0,
+          rotateY: 0,
+          xPercent: 0,
+          yPercent: 0,
           opacity: 1,
           scale: 1,
-          duration: 1.1,
-          ease: "power4.out",
+          duration: 1.15,
+          ease: "power3.out",
         },
 
         0
@@ -339,14 +356,15 @@ export default function Home() {
       );
 
       /* ---------------------------------------------------
-         FLOATING BOTTLE
+         FLOATING BOTTLE (WITH GENTLE ROCKING ROTATION)
          --------------------------------------------------- */
 
       gsap.to(
         `.slide-${active} .bottle-float`,
         {
-          y: -10,
-          duration: 2.2,
+          y: -12,
+          rotate: 2.5,
+          duration: 2.4,
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true,
